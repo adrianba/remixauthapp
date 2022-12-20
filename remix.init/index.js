@@ -10,6 +10,7 @@ async function main({ rootDirectory }) {
   const GITIGNORE_PATH = path.join(rootDirectory, ".gitignore");
   const APPROOT_PATH = path.join(rootDirectory, "app/root.tsx");
   const APPINDEX_PATH = path.join(rootDirectory, "app/routes/index.tsx");
+  const DOCKERCOMPOSE_PATH = path.join(rootDirectory, "docker-compose.yml");
 
   const DIR_NAME = path.basename(rootDirectory);
 
@@ -17,15 +18,15 @@ async function main({ rootDirectory }) {
     // get rid of anything that's not allowed in an app name
     .replace(/[^a-zA-Z0-9-_]/g, "-");
 
-  const [packageJson, readme, gitignore, appRoot, appIndex] = await Promise.all(
-    [
+  const [packageJson, readme, gitignore, appRoot, appIndex, dockerCompose] =
+    await Promise.all([
       fs.readFile(PACKAGE_JSON_PATH, "utf-8"),
       fs.readFile(README_PATH, "utf-8"),
       fs.readFile(GITIGNORE_PATH, "utf-8"),
       fs.readFile(APPROOT_PATH, "utf-8"),
       fs.readFile(APPINDEX_PATH, "utf-8"),
-    ]
-  );
+      fs.readFile(DOCKERCOMPOSE_PATH, "utf-8"),
+    ]);
 
   const newPackageJson =
     JSON.stringify(
@@ -45,12 +46,16 @@ async function main({ rootDirectory }) {
      */
     fs.writeFile(
       GITIGNORE_PATH,
-      gitignore.replace(/#<rm>(.|\n)*#<\/rm>\n/, "")
+      gitignore.replace(/#<rm>(.|\n)*#<\/rm>\n/, "") + "\ndocker-compose.yml\n"
     ),
     fs.writeFile(PACKAGE_JSON_PATH, newPackageJson),
     fs.writeFile(README_PATH, readme.replaceAll("REMIXAPP", APP_NAME)),
     fs.writeFile(APPROOT_PATH, appRoot.replaceAll("REMIXAPP", APP_NAME)),
     fs.writeFile(APPINDEX_PATH, appIndex.replaceAll("REMIXAPP", APP_NAME)),
+    fs.writeFile(
+      DOCKERCOMPOSE_PATH,
+      dockerCompose.replaceAll("REMIXAPP", APP_NAME)
+    ),
   ]);
 }
 

@@ -10,5 +10,4 @@ node_modules
 /public/build
 .env
 production.env
-docker-compose.yml
 app/tailwind.css

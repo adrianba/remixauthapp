@@ -9,7 +9,7 @@ services:
       - proxynet
     labels:
       - traefik.enable=true
-      - traefik.http.routers.REMIXAPP.rule=Host(`REMIXAPP.HOSTNAME`)
+      - traefik.http.routers.REMIXAPP.rule=Host(`HOSTNAME`)
       - traefik.port=3000
 
 networks:
