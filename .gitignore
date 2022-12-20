@@ -1,3 +1,9 @@
+#<rm>
+# We don't want lockfiles in stack templates,
+# as people could use a different package manager
+# This part will be removed by `remix.init`
+package-lock.json
+#</rm>
 node_modules
 /.cache
 /build
