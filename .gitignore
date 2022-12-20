@@ -1,0 +1,8 @@
+node_modules
+/.cache
+/build
+/public/build
+.env
+production.env
+docker-compose.yml
+app/tailwind.css
