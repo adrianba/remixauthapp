@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  REMIXAPP:
+    image: ghcr.io/adrianba/REMIXAPP:latest
+    container_name: REMIXAPP
+    restart: unless-stopped
+    networks:
+      - proxynet
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.REMIXAPP.rule=Host(`REMIXAPP.HOSTNAME`)
+      - traefik.port=3000
+
+networks:
+  proxynet:
+    external: true
