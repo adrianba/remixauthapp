@@ -3,5 +3,5 @@
 To get started, run:
 
 ```sh
-npx create-remix@latest --template adrianba/remixauthapp
+npx create-remix@latest --template adrianba/remixauthapp --typescript
 ```
