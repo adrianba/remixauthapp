@@ -8,6 +8,5 @@ node_modules
 /.cache
 /build
 /public/build
-.env
 production.env
 app/tailwind.css

@@ -46,7 +46,8 @@ async function main({ rootDirectory }) {
      */
     fs.writeFile(
       GITIGNORE_PATH,
-      gitignore.replace(/#<rm>(.|\n)*#<\/rm>\n/, "") + "\ndocker-compose.yml\n"
+      gitignore.replace(/#<rm>(.|\n)*#<\/rm>\n/, "") +
+        "\ndocker-compose.yml\n.env\n"
     ),
     fs.writeFile(PACKAGE_JSON_PATH, newPackageJson),
     fs.writeFile(README_PATH, readme.replaceAll("REMIXAPP", APP_NAME)),
